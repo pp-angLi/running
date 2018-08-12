@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+        <style>
+
+            html, body, ul, li {
+                margin: 0;
+                padding: 0;
+            }
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
+            .photo_roll {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                overflow: hidden;
+            }
+
+            @keyframes photoRollLeft {
+                form {left: 0;}
+                to {left: 100%;}
+            }
+            @keyframes photoRollLeft1 {
+                form {left: 100%;}
+                to {left: 0;}
+            }
+            @keyframes photoRollRight {
+                form {left: 0;}
+                to {left: -100%;}
+            }
+            @keyframes photoRollRight1 {
+                form {left: -100%;}
+                to {left: 0;}
+            }
+            .photo_roll_list_run_right {
+                animation: 1s photoRollRight 1;
+            }
+            .photo_roll_list_run_right1 {
+                animation: 1s photoRollRight1 1;
+            }
+            .photo_roll_list_run_left {
+                animation: 1s photoRollLeft 1;
+            }
+            .photo_roll_list_run_left1 {
+                animation: 1s photoRollLeft1 1;
+            }
+            .photo_roll_list {
+                width: 100%;
+                height: 100%;
+                display: inline-block;
+                position: absolute;
+                top: 0;
+            }
+            .photo_roll_list:nth-of-type(1) {
+                background: url('./img/11.jpg');
+                background-size: cover;
+            }
+            .photo_roll_list:nth-of-type(2) {
+                background: url('./img/17.jpg');
+                background-size: cover;
+            }
+            .photo_roll_list:nth-of-type(3) {
+                background: url('./img/IMG_3172.jpg');
+                background-size: cover;
+            }
+            .photo_roll_list:nth-of-type(4) {
+                background: url('./img/834169.jpg');
+                background-size: cover;
+            }
+            .photo_roll_list_center {
+                left: 0;
+            }
+            .photo_roll_list_left {
+                left: 100%;
+            }
+            .photo_roll_list_right {
+                left: -100%;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <ul class="photo_roll">
+            <li class="photo_roll_list photo_roll_list_center"></li>
+            <li class="photo_roll_list photo_roll_list_left"></li>
+            <li class="photo_roll_list photo_roll_list_left"></li>
+            <li class="photo_roll_list photo_roll_list_left"></li>
+        </ul>
+
+        <script type="text/javascript">
+            let getStyle = function (obj, attr) {
+                if(obj.currentStyle) {
+                    return parseInt(obj.currentStyle[attr]);
+                }
+                else {
+                    return parseInt(getComputedStyle(obj, false)[attr]);
+                }
+            }
+
+           b = (getWho) => {
+                let photo = getWho || document.getElementsByClassName('photo_roll_list');
+                let listBox = [];
+                let timer1;
+                let timer2;
+                for(let i = 0; i < photo.length; i++) { //
+                    listBox.push(getStyle(photo[i], 'left'));
+                }
+
+                for( let i = 0; i < photo.length; i++ ) {
+                    if(listBox[i] === 0) {
+                        continue;
+                    }
+                    else {
+                        photo[i].classList.remove('photo_roll_list_right');
+                        photo[i].classList.add('photo_roll_list_left');
+                    }
+                }
+
+                for( let i =0; i < photo.length; i++ ) {
+                    if(listBox[i] === 0) {
+                        if(i+1 != photo.length) {
+                            photo[i].classList.add('photo_roll_list_run_right');
+                            photo[i+1].classList.add('photo_roll_list_run_left1');
+                            timer1 = setTimeout(function () {
+                                return c(photo, i, false);
+                            }, 1000);
+                        }
+                        else {
+                            photo[i].classList.add('photo_roll_list_run_right');
+                            photo[0].classList.add('photo_roll_list_run_left1');
+                            timer2 = setTimeout(function () {
+                                return c(photo, i, true);
+                            }, 1000);
+                        }
+                    }
+                }
+
+                // addEventListener('mouseenter', function , false);
+                // addEventListener('mouseleave', function , false);
+            }
+
+            turnLeft = (photo, index) => {
+                let timer;
+                photo[index].classList.remove('photo_roll_list_run_left1');
+                photo[index].classList.remove('photo_roll_list_left');
+                photo[index].classList.add('photo_roll_list_center');
+                timer = setTimeout(function () {
+                    return b();
+                }, 1000);
+            }
+            c = (photo, index, flag) => {
+                let timer1;
+                let timer2;
+                photo[index].classList.remove('photo_roll_list_run_right');
+                photo[index].classList.remove('photo_roll_list_center');
+                photo[index].classList.add('photo_roll_list_right');
+                if(flag) {
+                    return turnLeft(photo, 0);
+                }
+                else {
+                    return turnLeft(photo, index+1);
+                }
+            }
+
+            b();
+
+        </script>
+
+    </body>
+</html>

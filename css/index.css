@@ -1,0 +1,78 @@
+/*
+* @Author: anchen
+* @Date:   2017-08-03 17:13:12
+* @Last Modified by:   anchen
+* @Last Modified time: 2017-08-06 14:44:45
+*/
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+.photo_box{
+    position: relative;
+    width: 800px;
+    height: 500px;
+    box-sizing: border-box;
+    margin: auto;
+    list-style: none;
+    display: block;
+    background: black;
+    overflow: hidden;
+}
+.photo{
+    width: 800px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+.photo:nth-of-type(1){
+    background: url('../img/5ffb33dcgy1fegi5b5q27j20qo0x4jxd.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    right: 0;
+}
+.photo:nth-of-type(2){
+    background: url('../img/5ffb33dcgy1fegi5dgglqj20qo0x4gph.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    right: -100%;
+}
+.photo:nth-of-type(3){
+    background: url('../img/5ffb33dcgy1fegi5fr5mbj20ia0g9wig.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    right: -100%;
+}
+.photo:nth-of-type(4){
+    background: url('../img/t01cdaf5ee6b7ac8642.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    right: -100%;
+}
+.photo_choice{
+    display: block;
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+}
+.circle{
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 0 10px;
+}
+.circle:hover {
+    background: #ea6565;
+    cursor: pointer;
+}
